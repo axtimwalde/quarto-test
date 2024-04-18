@@ -1,0 +1,33 @@
+
+<% for (const item of items) { %>
+<div class="quarto-post image-right" <%= metadataAttrs(item) %>>
+<div class="thumbnail">
+<a href="<%- item.path %>" class="no-external">
+<% if (item.image) { %>
+<p><img src="<%- item.image%>" class="thumbnail-image" alt="<%= item['image-alt'] %>"></p>
+<% } %>
+</a>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title"><a href="<%- item.path %>" class="no-external"><%= item.title %></a></h3>
+<div class="listing-subtitle"><a href="<%- item.path %>" class="no-external"><%= item.subtitle %></a></div>
+<div class="listing-categories">
+<% for (const category of item.categories) { %>
+<div class="listing-category" onclick="window.quartoListingCategory('<%=category%>'); return false;"><%= category %></div>
+<% } %>
+</div>
+<div class="delink listing-description"><a href="<%- item.path %>" class="no-external"><%= item.description %></a></div>
+</div>
+<div class="metadata"><a href="<%- item.path %>" class="no-external">
+<% if (item['date-modified'] === "Invalid Date") { %>
+<% if (item.date) { %><div class="listing-date">`<%= item.date %>`{=html}</div><% } %>
+<% if (item.author) { %><div class="listing-author"><%= item.author %></div><% } %>
+<% } else { %>
+<div class="listing-date">`<%= item['date-modified'] %>`{=html}</div>
+<% if (item.author) { %><div class="listing-author"><%= item.author %></div><% } %>
+<% if (item.date) { %><div class="listing-date" style="color:rgb(192,192,192)">first published on <nobr>`<%= item.date %>`{=html}</nobr></div><% } %>
+<% } %>
+</a></div>
+
+</div><% } %>
+
